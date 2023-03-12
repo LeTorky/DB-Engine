@@ -79,8 +79,8 @@ void move_current_index(int left_or_right, int* current_index, int last_index, C
         // Increment Index and move cursor to the right.
         if(*current_index <= last_index){
             *current_index += 1;
+            move_cursor_left_right(1, x_y);
         }
-        move_cursor_left_right(1, x_y);
     }
     // Move left
     // Decrement Index and move cursor to the left.
