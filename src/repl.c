@@ -2,20 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <windows.h>
-
-// REPL signature.
-char* user_entry REPL(void);
-
-// Function to move index left or right, depending on user input.
-void move_current_index(int left_or_right, int* current_index, int last_index, COORD* x_y);
-
-// Function to insert/replace character into character array.
-void insert_or_replace_character(char user_input, char** char_array, int* current_index, int* last_index, COORD* x_y);
-
-// Function to allocate new memory for new character inputs.
-void add_to_char_array(char user_input, char** char_array, int last_index);
-
-void move_cursor_left_right(int left_right, COORD* x_y);
+#include "repl.h"
 
 // Interface to Database Engine (REPL).
 char* user_entry REPL(void){
