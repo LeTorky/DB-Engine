@@ -1,3 +1,5 @@
+#include <windows.h>
+
 // REPL signature.
 char* REPL(void);
 
