@@ -1,5 +1,10 @@
 #include "repl.h"
+#include <stdio.h>
+#include "repl.c"
 
 void main(){
-    REPL();
+    //Variables
+    char* user_entry;
+    user_entry = REPL();
+    printf("%s", user_entry);
 }
