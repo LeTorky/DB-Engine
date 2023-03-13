@@ -6,5 +6,5 @@ void main(){
     //Variables
     char* user_entry;
     user_entry = REPL();
-    printf("%s", user_entry);
+    printf("\n %s", user_entry);
 }
