@@ -4,7 +4,7 @@
 #include <windows.h>
 
 // REPL signature.
-char* user_entry REPL();
+char* user_entry REPL(void);
 
 // Function to move index left or right, depending on user input.
 void move_current_index(int left_or_right, int* current_index, int last_index, COORD* x_y);
@@ -18,7 +18,7 @@ void add_to_char_array(char user_input, char** char_array, int last_index);
 void move_cursor_left_right(int left_right, COORD* x_y);
 
 // Interface to Database Engine (REPL).
-char* user_entry REPL(){
+char* user_entry REPL(void){
     system("cls");
     // Variables
     char* user_entry = (char*)malloc(sizeof(char));
