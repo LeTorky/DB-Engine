@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <windows.h>
 
+// REPL signature.
+char* user_entry REPL();
+
 // Function to move index left or right, depending on user input.
 void move_current_index(int left_or_right, int* current_index, int last_index, COORD* x_y);
 
@@ -14,8 +17,8 @@ void add_to_char_array(char user_input, char** char_array, int last_index);
 
 void move_cursor_left_right(int left_right, COORD* x_y);
 
-// Interface to Database (REPL).
-void main(){
+// Interface to Database Engine (REPL).
+char* user_entry REPL(){
     system("cls");
     // Variables
     char* user_entry = (char*)malloc(sizeof(char));
@@ -58,7 +61,7 @@ void main(){
 
             // Enter key case.
             case 13:
-                // Process Statement.
+                toggle = 0;
                 break;
 
             // Actual input characters.
@@ -71,6 +74,7 @@ void main(){
     }
     // Continue until toggle is turned.
     while(toggle);
+    return user_entry;
 }
 
 void move_current_index(int left_or_right, int* current_index, int last_index, COORD* x_y){
