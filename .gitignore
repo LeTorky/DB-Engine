@@ -1,2 +1,3 @@
 test-revision/
-.vscode/settings.json
+.vscode/
+src/repl.exe
