@@ -98,7 +98,7 @@ void insert_or_replace_character(char user_input, char** char_array, int* curren
 
 void add_to_char_array(char user_input, char** char_array, int last_index){
     // Allocating a new array with the new size. (+1)
-    char* new_array = (char*)malloc(((last_index||1)+1)*sizeof(char));
+    char* new_array = (char*)malloc((last_index+2)*sizeof(char));
     // Copying over old string.
     for(int i=0; i<last_index; i++){
         new_array[i] = (*char_array)[i];
