@@ -4,8 +4,9 @@
 #include <windows.h>
 #include "repl.h"
 
+
 // Interface to Database Engine (REPL).
-char* user_entry REPL(void){
+char* REPL(void){
     system("cls");
     // Variables
     char* user_entry = (char*)malloc(sizeof(char));
