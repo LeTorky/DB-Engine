@@ -10,7 +10,8 @@ void remove_from_char_array(char* char_array, int* current_index, int* last_inde
 char* REPL(void){
     system("cls");
     // Variables
-    char* user_entry = (char*)malloc(sizeof(char));
+    int char_array_size = 1000;
+    char* char_array = (char*)malloc(sizeof(char)*char_array_size);
     int toggle = 1;
     int current_index = 0;
     int last_index = -1;
@@ -50,7 +51,7 @@ char* REPL(void){
             
             // Backspace Key case.
             case 8:
-                remove_from_char_array(user_entry, &current_index, &last_index, &x_y);
+                remove_from_char_array(char_array, &current_index, &last_index, &x_y);
                 break;
             // Enter key case.
             case 13:
@@ -61,13 +62,13 @@ char* REPL(void){
             default:
                 // Print character, Move cursor and save character.
                 printf("%c", scanned_char);
-                insert_or_replace_character(scanned_char, &user_entry, &current_index, &last_index, &x_y);
+                insert_or_replace_character(scanned_char, &char_array, &current_index, &last_index, &x_y, &char_array_size);
                 break;
         }
     }
     // Continue until toggle is turned.
     while(toggle);
-    return user_entry;
+    return char_array;
 }
 
 void move_current_index(int left_or_right, int* current_index, int last_index, COORD* x_y){
@@ -87,11 +88,11 @@ void move_current_index(int left_or_right, int* current_index, int last_index, C
     }
 }
 
-void insert_or_replace_character(char user_input, char** char_array, int* current_index, int* last_index, COORD* x_y){
+void insert_or_replace_character(char user_input, char** char_array, int* current_index, int* last_index, COORD* x_y,  int* char_array_size){
     // Allocate an extra space for the new keyword.
     if(*current_index > *last_index){
         ++*last_index;
-        add_to_char_array(user_input, char_array, *last_index);
+        add_to_char_array(user_input, char_array, *last_index, char_array_size);
     }
     else{
         // Replaces character in array.
@@ -101,19 +102,23 @@ void insert_or_replace_character(char user_input, char** char_array, int* curren
     move_current_index(1, current_index, *last_index, x_y);
 }
 
-void add_to_char_array(char user_input, char** char_array, int last_index){
-    // Allocating a new array with the new size. (+1)
-    char* new_array = (char*)malloc((last_index+2)*sizeof(char));
-    // Copying over old string.
-    for(int i=0; i<last_index; i++){
-        new_array[i] = (*char_array)[i];
+void add_to_char_array(char user_input, char** char_array, int last_index, int* char_array_size){
+    char* new_array = *char_array;
+    if(last_index+2 > *char_array_size){
+        // Allocating a new array with the new size (+1000).
+        *char_array_size += 1000;
+        new_array = (char*)malloc((*char_array_size)*sizeof(char));
+        // Copying over old string.
+        for(int i=0; i<last_index; i++){
+            new_array[i] = (*char_array)[i];
+        }
+        // Freeing old pointer.
+        free(*char_array);
     }
     // Adding new character.
     new_array[last_index] = user_input;
     // Adding delimiter.
     new_array[last_index+1] = '\0';
-    // Freeing old pointer.
-    free(*char_array);
     // Assigning new address to the given character array pointer.
     *char_array = new_array;
 }
