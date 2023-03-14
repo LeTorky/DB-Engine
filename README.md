@@ -1,7 +1,7 @@
 <h1>Database Implementation</h1>
-<h2>
+<p style="font-size:20px;">
     Implementing a <u>Database-Engine</u> using <u>C</u> programming language.
-</h2>
+</p>
 <br/>
 <h2>
     <u>Content</u>
