@@ -55,8 +55,8 @@ char* REPL(void){
             // Actual input characters.
             default:
                 // Move cursor, print and save character.
-                insert_or_replace_character(scanned_char, &user_entry, &current_index, &last_index, &x_y);
                 printf("%c", scanned_char);
+                insert_or_replace_character(scanned_char, &user_entry, &current_index, &last_index, &x_y);
                 break;
         }
     }
