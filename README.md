@@ -2,7 +2,6 @@
 <p style="font-size:20px;">
     Implementing a <u>Database-Engine</u> using <u>C</u> programming language.
 </p>
-<br/>
 <h2>
     <u>Content</u>
 </h2>
