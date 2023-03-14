@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "repl.h"
 
+void remove_from_char_array(char* char_array, int* current_index, int* last_index, COORD* x_y);
 
 // Interface to Database Engine (REPL).
 char* REPL(void){
@@ -46,7 +47,11 @@ char* REPL(void){
                 toggle = 0;
                 printf("\n Exited successfully!");
                 break;
-
+            
+            // Backspace Key case.
+            case 8:
+                remove_from_char_array(user_entry, &current_index, &last_index, &x_y);
+                break;
             // Enter key case.
             case 13:
                 toggle = 0;
@@ -54,7 +59,7 @@ char* REPL(void){
 
             // Actual input characters.
             default:
-                // Move cursor, print and save character.
+                // Print character, Move cursor and save character.
                 printf("%c", scanned_char);
                 insert_or_replace_character(scanned_char, &user_entry, &current_index, &last_index, &x_y);
                 break;
@@ -111,6 +116,21 @@ void add_to_char_array(char user_input, char** char_array, int last_index){
     free(*char_array);
     // Assigning new address to the given character array pointer.
     *char_array = new_array;
+}
+
+void remove_from_char_array(char* char_array, int* current_index, int* last_index, COORD* x_y){
+    if(*current_index){
+        move_current_index(0, current_index, *last_index, x_y);
+        for(int i=0; i<*last_index; i++){
+            if(i>=*current_index){
+                char_array[i] = char_array[i+1];
+                printf("%c", char_array[i+1]);
+            }
+        }
+        char_array[*last_index] = '\0';
+        printf("%c", ' ');
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), *x_y);
+    }
 }
 
 void move_cursor_left_right(int left_right, COORD* x_y){
