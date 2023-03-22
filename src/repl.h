@@ -17,3 +17,5 @@ void add_to_char_array(char user_input, char** char_array, int last_index, int* 
 
 // Function to move cursor left or right.
 void move_cursor_left_right(int left_right, COORD* x_y);
+
+void paste_from_clipboard(char** char_array, int* current_index, int* last_index, COORD* x_y,  int* char_array_size);

@@ -53,6 +53,11 @@ char* REPL(void){
             case 8:
                 remove_from_char_array(char_array, &current_index, &last_index, &x_y);
                 break;
+            
+            case 22:
+                paste_from_clipboard(&char_array, &current_index, &last_index, &x_y, &char_array_size);
+                break;
+
             // Enter key case.
             case 13:
                 toggle = 0;
@@ -144,4 +149,23 @@ void move_cursor_left_right(int left_right, COORD* x_y){
     else
         --x_y->X;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), *x_y);
+}
+
+void paste_from_clipboard(char** char_array, int* current_index, int* last_index, COORD* x_y,  int* char_array_size){
+    char* buffer_pointer;
+    int toggle_copy = 1;
+    HANDLE data_handler;
+    OpenClipboard(NULL);
+    data_handler = GetClipboardData(CF_TEXT);
+    CloseClipboard();
+    buffer_pointer = (char*)GlobalLock(data_handler);
+    for(int i=0;toggle_copy;i++){
+        if(buffer_pointer[i] != '\0'){
+            printf("%c",buffer_pointer[i]);
+            insert_or_replace_character(buffer_pointer[i], char_array, current_index, last_index, x_y, char_array_size);
+        }
+        else{
+            toggle_copy = 0;
+        }
+    }
 }
