@@ -28,6 +28,7 @@ tokenArray tokenizer(char* query_string){
                         token_array.array[i][current_token_char_index+1] = '\0';
                         get_previous_token = 0;
                         next_token_toggle = 1;
+                        --token_array.size;
                     }
                     else{
                         switch(query_string[current_query_string_index]){
@@ -61,7 +62,7 @@ tokenArray tokenizer(char* query_string){
                                     get_previous_token = 1;
                                     next_token_toggle = 1;
                                 }
-                                else if(!current_token_char_index && query_string[current_token_char_index+1] != 32 && !escape_toggle){
+                                else if(!current_token_char_index && query_string[current_query_string_index+1] != 32 && !escape_toggle){
                                     get_previous_token = 1;
                                     next_token_toggle = 1;
                                     i--;
